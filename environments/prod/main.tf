@@ -1,17 +1,17 @@
 resource "google_api_gateway_api" "api_gw" {
   provider = google-beta
-  api_id = "my-api"
+  api_id = "postspot-api"
 }
 
 resource "google_api_gateway_api_config" "api_gw" {
   provider = google-beta
   api = google_api_gateway_api.api_gw.api_id
-  api_config_id = "my-config"
+  api_config_id = "postspot-api-config"
 
   openapi_documents {
     document {
       path = "spec.yaml"
-      contents = filebase64("test-fixtures/apigateway/openapi.yaml")
+      contents = filebase64("openapi.yaml")
     }
   }
   lifecycle {
@@ -22,5 +22,5 @@ resource "google_api_gateway_api_config" "api_gw" {
 resource "google_api_gateway_gateway" "api_gw" {
   provider = google-beta
   api_config = google_api_gateway_api_config.api_gw.id
-  gateway_id = "my-gateway"
+  gateway_id = "postspot-api-gateway"
 }
