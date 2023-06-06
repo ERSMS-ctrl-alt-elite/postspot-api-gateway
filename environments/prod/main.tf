@@ -2,6 +2,7 @@ resource "google_api_gateway_api" "api_gw" {
   project = var.project_id
   provider = google-beta
   api_id = "postspot-api"
+  display_name = "PostSpot API"
 }
 
 resource "google_api_gateway_api_config" "api_gw" {
