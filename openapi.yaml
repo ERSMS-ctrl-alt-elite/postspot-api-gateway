@@ -8,7 +8,6 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-host: postspot-api-3t07xvb30siqy.apigateway.postspot-388715.cloud.goog
 basePath: /v1
 schemes:
   - https

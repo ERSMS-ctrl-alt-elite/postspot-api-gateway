@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
     bucket = "postspot-tf-state"
-    prefix = "user-service/env/dev"
+    prefix = "api-gateway/env/dev"
   }
 
   required_providers {
