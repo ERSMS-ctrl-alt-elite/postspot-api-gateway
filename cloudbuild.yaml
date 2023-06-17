@@ -1,0 +1,29 @@
+steps:
+
+- id: 'Prepare and apply Terraform migration'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "environments/$BRANCH_NAME/" ]; then
+        cd environments/$BRANCH_NAME
+
+        source /workspace/latest_image_tag.env
+        export TF_VAR_gcp_project_id=$PROJECT_ID
+        export TF_VAR_environment=$BRANCH_NAME
+
+        terraform init
+        terraform fmt -check
+        terraform validate
+        terraform plan
+        terraform apply -auto-approve
+      else
+        echo "***************************** SKIPPING APPLYING *******************************"
+        echo "Branch '$BRANCH_NAME' does not represent an official environment."
+        echo "*******************************************************************************"
+      fi 
+
+images:
+- '${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}-${_ENVIRONMENT}'
+timeout: "1600s"

@@ -74,3 +74,14 @@ paths:
       responses:
         default:
           description: Default error sample response
+  /test_endpoint1:
+    get:
+      x-google-backend:
+        address: https://user-service-prod-w6bxxp65eq-lm.a.run.app/api/v1
+      summary: Test endpoint
+      description: ''
+      operationId: 'test'
+      responses:
+        default:
+          description: Default error sample response
+  
