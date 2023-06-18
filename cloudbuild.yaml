@@ -19,9 +19,9 @@ steps:
         --region ${_LOCATION} \
         --format 'value(status.url)')
 
-      echo TF_VAR_user_service_url >> /workspace/backends_urls.env
-      echo TF_VAR_post_service_url >> /workspace/backends_urls.env
-      echo TF_VAR_notification_service_url >> /workspace/backends_urls.env
+      echo "export TF_VAR_user_service_url=$TF_VAR_user_service_url" >> /workspace/backends_urls.env
+      echo "export TF_VAR_post_service_url=$TF_VAR_post_service_url" >> /workspace/backends_urls.env
+      echo "export TF_VAR_notification_service_url=$TF_VAR_notification_service_url" >> /workspace/backends_urls.env
 
 - id: 'Prepare and apply Terraform migration'
   name: 'hashicorp/terraform:1.0.0'
