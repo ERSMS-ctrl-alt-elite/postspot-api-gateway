@@ -10,6 +10,7 @@ steps:
       gcloud services enable firestore.googleapis.com --project ${_PROJECT_ID}
       gcloud services enable apigateway.googleapis.com --project ${_PROJECT_ID}
       gcloud services enable secretmanager.googleapis.com --project ${_PROJECT_ID}
+      gcloud services enable run.googleapis.com --project ${_PROJECT_ID}
 
 - id: Get Cloud Run backends URLs 
   name: 'gcr.io/cloud-builders/gcloud'
