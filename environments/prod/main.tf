@@ -62,13 +62,21 @@ resource "google_api_gateway_gateway" "postspot_api_gateway" {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                Additional resources common for all services                */
+/*                            Enable required APIs                            */
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------- Enable Firestore API -------------------------- */
 resource "google_project_service" "firestore" {
   project = var.project_id
   service = "firestore.googleapis.com"
+
+  disable_dependent_services = true
+}
+
+/* ----------------------- Cloud Resource Manager API ----------------------- */
+resource "google_project_service" "cloudresourcemanager" {
+  project = var.project_id
+  service = "cloudresourcemanager.googleapis.com"
 
   disable_dependent_services = true
 }
