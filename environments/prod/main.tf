@@ -31,9 +31,9 @@ resource "google_api_gateway_api_config" "postspot_api_config" {
         templatefile(
           "../../openapi.yaml",
           {
-            version          = local.version,
-            user_service_url = var.user_service_url,
-            post_service_url = var.post_service_url,
+            version                  = local.version,
+            user_service_url         = var.user_service_url,
+            post_service_url         = var.post_service_url,
             notification_service_url = var.notification_service_url,
           }
         )
@@ -65,18 +65,16 @@ resource "google_api_gateway_gateway" "postspot_api_gateway" {
 /*                            Enable required APIs                            */
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------- Enable Firestore API -------------------------- */
-resource "google_project_service" "firestore" {
-  project = var.project_id
-  service = "firestore.googleapis.com"
+# resource "google_project_service" "firestore" {
+#   project                    = var.project_id
+#   service                    = "firestore.googleapis.com"
+#   disable_dependent_services = false
+#   disable_on_destroy         = false
+# }
 
-  disable_dependent_services = true
-}
-
-/* ----------------------- Cloud Resource Manager API ----------------------- */
-resource "google_project_service" "cloudresourcemanager" {
-  project = var.project_id
-  service = "cloudresourcemanager.googleapis.com"
-
-  disable_dependent_services = true
-}
+# resource "google_project_service" "cloudresourcemanager" {
+#   project                    = var.project_id
+#   service                    = "cloudresourcemanager.googleapis.com"
+#   disable_dependent_services = false
+#   disable_on_destroy         = false
+# }
