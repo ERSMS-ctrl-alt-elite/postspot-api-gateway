@@ -1,5 +1,13 @@
 steps:
 
+- id: Enable APIs
+  name: 'gcr.io/gcloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+      gcloud services enable cloudresourcemanager.googleapis.com --project ${_PROJECT_ID}
+
 - id: Get Cloud Run backends URLs 
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'

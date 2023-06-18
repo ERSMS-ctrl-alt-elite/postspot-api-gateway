@@ -16,6 +16,8 @@ resource "google_api_gateway_api" "postspot_api" {
   lifecycle {
     create_before_destroy = true
   }
+
+  depends_on = [google_project_service.cloud_resource_manager]
 }
 
 resource "google_api_gateway_api_config" "postspot_api_config" {
@@ -44,7 +46,7 @@ resource "google_api_gateway_api_config" "postspot_api_config" {
     create_before_destroy = true
   }
 
-  depends_on = [google_api_gateway_api.postspot_api]
+  depends_on = [google_project_service.cloud_resource_manager, google_api_gateway_api.postspot_api]
 }
 
 resource "google_api_gateway_gateway" "postspot_api_gateway" {
@@ -58,7 +60,7 @@ resource "google_api_gateway_gateway" "postspot_api_gateway" {
     create_before_destroy = true
   }
 
-  depends_on = [google_api_gateway_api_config.postspot_api_config]
+  depends_on = [google_project_service.cloud_resource_manager, google_api_gateway_api_config.postspot_api_config]
 }
 
 /* -------------------------------------------------------------------------- */
@@ -70,11 +72,6 @@ resource "google_api_gateway_gateway" "postspot_api_gateway" {
 #   service                    = "firestore.googleapis.com"
 #   disable_dependent_services = false
 #   disable_on_destroy         = false
-# }
 
-# resource "google_project_service" "cloudresourcemanager" {
-#   project                    = var.project_id
-#   service                    = "cloudresourcemanager.googleapis.com"
-#   disable_dependent_services = false
-#   disable_on_destroy         = false
+#   depends_on = [google_project_service.cloud_resource_manager]
 # }
