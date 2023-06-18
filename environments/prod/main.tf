@@ -3,6 +3,10 @@ locals {
   suffix  = "${var.environment}-v${replace(local.version, ".", "-")}"
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                 API Gateway                                */
+/* -------------------------------------------------------------------------- */
+
 resource "google_api_gateway_api" "postspot_api" {
   project      = var.project_id
   provider     = google-beta
@@ -55,4 +59,16 @@ resource "google_api_gateway_gateway" "postspot_api_gateway" {
   }
 
   depends_on = [google_api_gateway_api_config.postspot_api_config]
+}
+
+/* -------------------------------------------------------------------------- */
+/*                Additional resources common for all services                */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------- Enable Firestore API -------------------------- */
+resource "google_project_service" "firestore" {
+  project = var.project_id
+  service = "firestore.googleapis.com"
+
+  disable_dependent_services = true
 }
