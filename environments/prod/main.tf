@@ -1,11 +1,12 @@
 locals {
-  version = "v1-0-0"
+  version = "1.0.1"
+  suffix  = "${var.environment}-v${replace(local.version, ".", "-")}"
 }
 
 resource "google_api_gateway_api" "postspot_api" {
-  project = var.project_id
-  provider = google-beta
-  api_id = "postspot-api-${var.environment}-${local.version}"
+  project      = var.project_id
+  provider     = google-beta
+  api_id       = "postspot-api-${local.suffix}"
   display_name = "PostSpot API"
 
   lifecycle {
@@ -14,15 +15,24 @@ resource "google_api_gateway_api" "postspot_api" {
 }
 
 resource "google_api_gateway_api_config" "postspot_api_config" {
-  project = var.project_id
-  provider = google-beta
-  api = google_api_gateway_api.postspot_api.api_id
-  api_config_id = "postspot-api-config-${var.environment}-${local.version}"
+  project       = var.project_id
+  provider      = google-beta
+  api           = google_api_gateway_api.postspot_api.api_id
+  api_config_id = "postspot-api-config-${local.suffix}"
 
   openapi_documents {
     document {
       path = "spec.yaml"
-      contents = filebase64("../../openapi.yaml")
+      contents = filebase64(
+        templatefile(
+          "../../openapi.yaml",
+          {
+            version          = local.version,
+            user_service_url = var.user_service_url,
+            post_service_url = var.post_service_url
+          }
+        )
+      )
     }
   }
   lifecycle {
@@ -33,11 +43,11 @@ resource "google_api_gateway_api_config" "postspot_api_config" {
 }
 
 resource "google_api_gateway_gateway" "postspot_api_gateway" {
-  project = var.project_id
-  region = var.api_gateway_region
-  provider = google-beta
+  project    = var.project_id
+  region     = var.api_gateway_region
+  provider   = google-beta
   api_config = google_api_gateway_api_config.postspot_api_config.id
-  gateway_id = "postspot-api-gateway-eu-${var.environment}-${local.version}"
+  gateway_id = "postspot-api-gateway-eu-${local.suffix}"
 
   lifecycle {
     create_before_destroy = true
