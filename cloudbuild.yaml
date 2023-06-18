@@ -6,22 +6,23 @@ steps:
   args: 
   - '-c'
   - | 
-      export TF_VAR_user_service_url=$(gcloud run services describe \
+      gcloud run services describe \
         user-service-${_ENVIRONMENT} \
         --region ${_LOCATION} \
-        --format 'value(status.url)')
-      export TF_VAR_post_service_url=$(gcloud run services describe \
+        --format 'value(format("export\ TF_VAR_user_service_url={0}", status.url))' \
+        >> /workspace/backends_urls.env
+
+      gcloud run services describe \
         post-service-${_ENVIRONMENT} \
         --region ${_LOCATION} \
-        --format 'value(status.url)')
-      export TF_VAR_notification_service_url=$(gcloud run services describe \
+        --format 'value(format("export\ TF_VAR_post_service_url={0}", status.url))' \
+        >> /workspace/backends_urls.env
+
+      gcloud run services describe \
         notification-service-${_ENVIRONMENT} \
         --region ${_LOCATION} \
-        --format 'value(status.url)')
-
-      echo "export TF_VAR_user_service_url=$TF_VAR_user_service_url" >> /workspace/backends_urls.env
-      echo "export TF_VAR_post_service_url=$TF_VAR_post_service_url" >> /workspace/backends_urls.env
-      echo "export TF_VAR_notification_service_url=$TF_VAR_notification_service_url" >> /workspace/backends_urls.env
+        --format 'value(format("export\ TF_VAR_notification_service_url={0}", status.url))' \
+        >> /workspace/backends_urls.env
 
 - id: 'Prepare and apply Terraform migration'
   name: 'hashicorp/terraform:1.0.0'
