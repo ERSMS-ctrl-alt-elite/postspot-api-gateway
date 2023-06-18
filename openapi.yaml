@@ -74,13 +74,13 @@ paths:
       responses:
         default:
           description: Default error sample response
-  /test_endpoint1:
+  /hello_notification:
     get:
       x-google-backend:
-        address: ${user_service_url}
-      summary: Test endpoint
+        address: ${notification_service_url} 
+      summary: Displays notification service hello page
       description: ''
-      operationId: 'test'
+      operationId: 'hello_notification'
       responses:
         default:
           description: Default error sample response
