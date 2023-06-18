@@ -1,7 +1,7 @@
 steps:
 
 - id: Enable APIs
-  name: 'gcr.io/gcloud-builders/gcloud'
+  name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args:
   - '-c'
