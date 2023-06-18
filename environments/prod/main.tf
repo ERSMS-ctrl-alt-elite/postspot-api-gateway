@@ -18,7 +18,7 @@ resource "google_api_gateway_api_config" "api_gw" {
     }
   }
   lifecycle {
-    create_before_destroy = false
+    create_before_destroy = true
   }
 }
 
