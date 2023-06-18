@@ -1,14 +1,14 @@
-resource "google_api_gateway_api" "api_gw" {
+resource "google_api_gateway_api" "postspot_api" {
   project = var.project_id
   provider = google-beta
   api_id = "postspot-api-${var.environment}"
   display_name = "PostSpot API"
 }
 
-resource "google_api_gateway_api_config" "api_gw" {
+resource "google_api_gateway_api_config" "postspot_api_config" {
   project = var.project_id
   provider = google-beta
-  api = google_api_gateway_api.api_gw.api_id
+  api = google_api_gateway_api.postspot_api.api_id
   api_config_id = "postspot-api-config-${var.environment}"
 
   openapi_documents {
@@ -20,14 +20,16 @@ resource "google_api_gateway_api_config" "api_gw" {
   lifecycle {
     create_before_destroy = true
   }
+
+  depends_on = [google_api_gateway_api.postspot_api]
 }
 
-resource "google_api_gateway_gateway" "api_gw" {
+resource "google_api_gateway_gateway" "postspot_api_gateway" {
   project = var.project_id
   region = var.api_gateway_region
   provider = google-beta
-  api_config = google_api_gateway_api_config.api_gw.id
+  api_config = google_api_gateway_api_config.postspot_api_config.id
   gateway_id = "postspot-api-gateway-eu-${var.environment}"
 
-  depends_on = [google_api_gateway_api_config.api_gw]
+  depends_on = [google_api_gateway_api_config.postspot_api_config]
 }
