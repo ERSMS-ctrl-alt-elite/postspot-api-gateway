@@ -1,5 +1,5 @@
 locals {
-  version = "v1.0.0"
+  version = "v1-0-0"
 }
 
 resource "google_api_gateway_api" "postspot_api" {
