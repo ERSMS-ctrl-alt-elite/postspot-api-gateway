@@ -77,7 +77,7 @@ paths:
   /test_endpoint1:
     get:
       x-google-backend:
-        address: https://user-service-prod-w6bxxp65eq-lm.a.run.app/api/v1
+        address: https://user-service-prod-w6bxxp65eq-lm.a.run.app
       summary: Test endpoint
       description: ''
       operationId: 'test'
