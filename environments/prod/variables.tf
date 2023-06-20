@@ -27,3 +27,7 @@ variable "post_service_url" {
 variable "notification_service_url" {
   type = string
 }
+
+variable "commit_sha" {
+  type = string
+}
