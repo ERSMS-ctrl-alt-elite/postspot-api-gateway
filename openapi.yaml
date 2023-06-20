@@ -13,6 +13,8 @@ schemes:
   - https
 security:
   - api_key: []
+x-google-backend:
+  path_translation: APPEND_PATH_TO_ADDRESS
 x-google-management:
   metrics:
     - name: "get-requests"
