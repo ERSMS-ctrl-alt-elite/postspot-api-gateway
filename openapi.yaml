@@ -85,110 +85,110 @@ paths:
         default:
           description: Default error sample response
   /users:
-      post:
-        x-google-backend:
-          address: ${user_service_url}
-        parameters: []
-        responses:
-          '200':
-            content:
-              application/json:
-                schema: {}
-            description: Successful response
-        summary: Signup
-    /users/{followee_google_id}/followers:
-      get:
-        x-google-backend:
-          address: ${user_service_url}
-        parameters:
-        - in: path
-          name: followee_google_id
-          schema:
-            type: string
-          required: true
-        responses:
-          '200':
-            content:
-              application/json:
-                schema: &id001 {}
-            description: Successful response
-          '404':
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/HTTPError'
-            description: Not found
-        summary: Get Followers
-      post:
-        x-google-backend:
-          address: ${user_service_url}
-        parameters:
-        - in: path
-          name: followee_google_id
-          schema:
-            type: string
-          required: true
-        responses:
-          '200':
-            content:
-              application/json:
-                schema: *id001
-            description: Successful response
-          '404':
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/HTTPError'
-            description: Not found
-        summary: Follow User
-    /users/{follower_google_id}/followees:
-      get:
-        x-google-backend:
-          address: ${user_service_url}
-        parameters:
-        - in: path
-          name: follower_google_id
-          schema:
-            type: string
-          required: true
-        responses:
-          '200':
-            content:
-              application/json:
-                schema: {}
-            description: Successful response
-          '404':
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/HTTPError'
-            description: Not found
-        summary: Get Followees
-    /users/{follower_google_id}/followees/{followee_google_id}:
-      delete:
-        x-google-backend:
-          address: ${user_service_url}
-        parameters:
-        - in: path
-          name: follower_google_id
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: followee_google_id
-          schema:
-            type: string
-          required: true
-        responses:
-          '200':
-            content:
-              application/json:
-                schema: {}
-            description: Successful response
-          '404':
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/HTTPError'
-            description: Not found
-        summary: Delete Followee
+    post:
+      x-google-backend:
+        address: ${user_service_url}
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful response
+      summary: Signup
+  /users/{followee_google_id}/followers:
+    get:
+      x-google-backend:
+        address: ${user_service_url}
+      parameters:
+      - in: path
+        name: followee_google_id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: &id001 {}
+          description: Successful response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+          description: Not found
+      summary: Get Followers
+    post:
+      x-google-backend:
+        address: ${user_service_url}
+      parameters:
+      - in: path
+        name: followee_google_id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: *id001
+          description: Successful response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+          description: Not found
+      summary: Follow User
+  /users/{follower_google_id}/followees:
+    get:
+      x-google-backend:
+        address: ${user_service_url}
+      parameters:
+      - in: path
+        name: follower_google_id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+          description: Not found
+      summary: Get Followees
+  /users/{follower_google_id}/followees/{followee_google_id}:
+    delete:
+      x-google-backend:
+        address: ${user_service_url}
+      parameters:
+      - in: path
+        name: follower_google_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: followee_google_id
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+          description: Not found
+      summary: Delete Followee
