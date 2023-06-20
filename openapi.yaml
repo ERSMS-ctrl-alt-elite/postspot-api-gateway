@@ -13,8 +13,6 @@ schemes:
   - https
 security:
   - api_key: []
-x-google-backend:
-  path_translation: APPEND_PATH_TO_ADDRESS
 x-google-management:
   metrics:
     - name: "get-requests"
@@ -60,6 +58,7 @@ paths:
     get:
       x-google-backend:
         address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
       summary: Displays user service hello page
       description: ''
       operationId: 'hello_user'
@@ -70,6 +69,7 @@ paths:
     get:
       x-google-backend:
         address: ${post_service_url} 
+        path_translation: APPEND_PATH_TO_ADDRESS
       summary: Displays post service hello page
       description: ''
       operationId: 'hello_post'
@@ -80,6 +80,7 @@ paths:
     get:
       x-google-backend:
         address: ${notification_service_url} 
+        path_translation: APPEND_PATH_TO_ADDRESS
       summary: Displays notification service hello page
       description: ''
       operationId: 'hello_notification'
@@ -91,6 +92,7 @@ paths:
       operationId: "signup"
       x-google-backend:
         address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters: []
       responses:
         '200':
@@ -101,6 +103,7 @@ paths:
       operationId: "get_followers"
       x-google-backend:
         address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
       - in: path
         type: string
@@ -116,6 +119,7 @@ paths:
       operationId: "add_followers"
       x-google-backend:
         address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
       - in: path
         type: string
@@ -132,6 +136,7 @@ paths:
       operationId: "get_followees"
       x-google-backend:
         address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
       - in: path
         type: string
@@ -148,6 +153,7 @@ paths:
       operationId: "delete_followees"
       x-google-backend:
         address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
       - in: path
         type: string
