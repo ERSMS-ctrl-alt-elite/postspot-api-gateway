@@ -31,3 +31,8 @@ variable "notification_service_url" {
 variable "commit_sha" {
   type = string
 }
+
+variable "domain" {
+  type = string
+  default = "postspot.gro4t.dev"
+}
