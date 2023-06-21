@@ -197,3 +197,24 @@ paths:
         '404':
           description: Not found
       summary: Read Post
+  /posts/{longitude}/{latitude}:
+    get:
+      operationId: "get_post_near_location"
+      x-google-backend:
+        address: ${post_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        name: longitude
+        type: number
+        required: true
+      - in: path
+        name: latitude
+        type: number
+        required: true
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+      summary: Get Posts Nearby
