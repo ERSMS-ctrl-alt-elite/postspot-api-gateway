@@ -2,11 +2,6 @@ variable "project_id" {
   type = string
 }
 
-variable "region" {
-  type    = string
-  default = "europe-central2"
-}
-
 variable "api_gateway_region" {
   type    = string
   default = "europe-west2"
@@ -30,9 +25,4 @@ variable "notification_service_url" {
 
 variable "commit_sha" {
   type = string
-}
-
-variable "domain" {
-  type    = string
-  default = "postspot.gro4t.dev"
 }

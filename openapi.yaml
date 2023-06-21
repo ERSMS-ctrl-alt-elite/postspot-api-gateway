@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: Specification for PostSpot API
-  version: ${version}
+  version: 1.0.0
   title: PostSpot OpenAPI 3.0
   contact:
     email: postspot@gmail.com
