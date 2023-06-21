@@ -69,6 +69,7 @@ resource "google_compute_backend_service" "backend_service" {
 }
 
 resource "google_compute_region_url_map" "postspot_url_map" {
+  name = "api-gateway-url-map"
   region = var.region
   default_service = google_compute_backend_service.backend_service.id
 }
