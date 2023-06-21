@@ -50,12 +50,16 @@ resource "google_api_gateway_gateway" "postspot_api_gateway" {
 resource "google_compute_global_network_endpoint_group" "postspot_neg" {
   name                  = "postspot-neg"
   network_endpoint_type = "INTERNET_FQDN_PORT"
+
+  depends_on = [google_api_gateway_gateway.postspot_api_gateway]
 }
 
 resource "google_compute_global_network_endpoint" "postspot_default_endpoint" {
   global_network_endpoint_group = google_compute_global_network_endpoint_group.postspot_neg.name
-  fqdn       = "postspot-api-gateway-eu-prod-v1-0-3-bwhx9h0z.nw.gateway.dev"
+  fqdn       = google_api_gateway_gateway.postspot_api_gateway.default_hostname
   port       = 443
+
+  depends_on = [ google_compute_global_network_endpoint_group.postspot_neg ]
 }
 
 resource "google_compute_backend_service" "postspot_backend_service" {
@@ -67,7 +71,7 @@ resource "google_compute_backend_service" "postspot_backend_service" {
     group = google_compute_global_network_endpoint_group.postspot_neg.id
   }
 
-  depends_on = [ google_compute_global_network_endpoint_group.postspot_neg ]
+  depends_on = [ google_compute_global_network_endpoint.postspot_default_endpoint ]
 }
 
 resource "google_compute_region_url_map" "postspot_url_map" {
