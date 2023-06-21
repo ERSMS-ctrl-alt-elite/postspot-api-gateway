@@ -176,6 +176,21 @@ paths:
         '200':
           description: Successful response
       summary: Add Post
+    get:
+      operationId: "get_post_by_author"
+      x-google-backend:
+        address: ${post_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: query
+        name: author_google_id
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Posts by author
+        '404':
+          description: Not found
   /posts/{post_id}:
     get:
       operationId: "get_post"
