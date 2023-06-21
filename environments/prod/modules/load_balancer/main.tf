@@ -5,7 +5,7 @@ resource "google_compute_global_network_endpoint_group" "postspot_neg" {
 
 resource "google_compute_global_network_endpoint" "postspot_default_endpoint" {
   global_network_endpoint_group = google_compute_global_network_endpoint_group.postspot_neg.name
-  fqdn                          = google_api_gateway_gateway.postspot_api_gateway.default_hostname
+  fqdn                          = var.api_gateway_hostname
   port                          = 443
 
   depends_on = [google_compute_global_network_endpoint_group.postspot_neg]

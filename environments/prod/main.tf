@@ -13,7 +13,8 @@ module "postspot_api_gateway" {
 module "postspot_load_balancer" {
   source = "./modules/load_balancer"
 
-  domain = var.domain
+  domain               = var.domain
+  api_gateway_hostname = module.postspot_api_gateway.hostname
 
-  depends_on = [postspot_api_gateway]
+  depends_on = [module.postspot_api_gateway]
 }
