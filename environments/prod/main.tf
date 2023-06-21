@@ -91,10 +91,10 @@ resource "google_compute_managed_ssl_certificate" "postspot_ssl_cert" {
 
 resource "google_compute_target_https_proxy" "postspot_target_https_proxy" {
   name             = "api-gateway-https-proxy"
-  url_map          = google_compute_region_url_map.postspot_url_map.id
+  url_map          = google_compute_url_map.postspot_url_map.id
   ssl_certificates = [google_compute_managed_ssl_certificate.postspot_ssl_cert.id]
 
-  depends_on = [ google_compute_region_url_map.postspot_url_map ]
+  depends_on = [ google_compute_url_map.postspot_url_map ]
 }
 
 resource "google_compute_global_forwarding_rule" "postspot_forwarding_rules" {
