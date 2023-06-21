@@ -1,5 +1,5 @@
 locals {
-  version = "1.0.8"
+  version = "1.0.9"
   suffix  = "${var.environment}-v${replace(local.version, ".", "-")}"
 }
 

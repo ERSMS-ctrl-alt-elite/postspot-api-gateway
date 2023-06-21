@@ -169,3 +169,31 @@ paths:
         '404':
           description: Not found
       summary: Delete Followee
+  /posts:
+    post:
+      operationId: "add_post"
+      x-google-backend:
+        address: ${post_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+      summary: Add Post
+  /posts/{post_id}:
+    get:
+      operationId: "get_post"
+      x-google-backend:
+        address: ${post_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        name: post_id
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+      summary: Read Post
