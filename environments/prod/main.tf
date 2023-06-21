@@ -74,9 +74,8 @@ resource "google_compute_backend_service" "postspot_backend_service" {
   depends_on = [ google_compute_global_network_endpoint.postspot_default_endpoint ]
 }
 
-resource "google_compute_region_url_map" "postspot_url_map" {
+resource "google_compute_url_map" "postspot_url_map" {
   name = "api-gateway-url-map"
-  region = var.region
   default_service = google_compute_backend_service.postspot_backend_service.id
 
   depends_on = [ google_compute_backend_service.postspot_backend_service ]
