@@ -52,7 +52,7 @@ resource "google_compute_global_network_endpoint_group" "postspot_neg" {
   network_endpoint_type = "INTERNET_FQDN_PORT"
 }
 
-resource "google_compute_global_network_endpoint" "default-endpoint" {
+resource "google_compute_global_network_endpoint" "postspot_default_endpoint" {
   global_network_endpoint_group = google_compute_global_network_endpoint_group.postspot_neg.name
   fqdn       = "postspot-api-gateway-eu-prod-v1-0-3-bwhx9h0z.nw.gateway.dev"
   port       = 443
@@ -61,10 +61,10 @@ resource "google_compute_global_network_endpoint" "default-endpoint" {
 resource "google_compute_backend_service" "backend_service" {
   name                    = "api-gateway-backend-service"
   protocol                = "HTTPS"
-  custom_request_headers  = ["host: ${google_compute_global_network_endpoint.default_endpoint.fqdn}"]
+  custom_request_headers  = ["host: ${google_compute_global_network_endpoint.postspot_default_endpoint.fqdn}"]
 
   backend {
-    group = google_compute_global_network_endpoint_group.postspot_neg.name
+    group = google_compute_global_network_endpoint_group.postspot_neg.id
   }
 }
 
@@ -77,7 +77,7 @@ resource "google_compute_managed_ssl_certificate" "postspot_ssl_cert" {
   name = "postspot-cert"
   
   managed {
-    domains = var.domain
+    domains = [var.domain]
   }
 }
 
