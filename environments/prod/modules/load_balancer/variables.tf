@@ -1,4 +1,4 @@
 variable "domain" {
-  type = string
+  type    = string
   default = "postspot.gro4t.dev"
 }
