@@ -21,7 +21,7 @@ resource "google_api_gateway_api_config" "postspot_api_config" {
           {
             user_service_url         = var.user_service_url,
             post_service_url         = var.post_service_url,
-            notification_service_url = var.notification_service_url,
+            recommendation_service_url = var.recommendation_service_url,
           }
         )
       )
