@@ -54,39 +54,6 @@ x-google-management:
         values:
           STANDARD: 1
 paths:
-  /hello_user:
-    get:
-      x-google-backend:
-        address: ${user_service_url}
-        path_translation: APPEND_PATH_TO_ADDRESS
-      summary: Displays user service hello page
-      description: ''
-      operationId: 'hello_user'
-      responses:
-        default:
-          description: Default error sample response
-  /hello_post:
-    get:
-      x-google-backend:
-        address: ${post_service_url} 
-        path_translation: APPEND_PATH_TO_ADDRESS
-      summary: Displays post service hello page
-      description: ''
-      operationId: 'hello_post'
-      responses:
-        default:
-          description: Default error sample response
-  /hello_notification:
-    get:
-      x-google-backend:
-        address: ${notification_service_url} 
-        path_translation: APPEND_PATH_TO_ADDRESS
-      summary: Displays notification service hello page
-      description: ''
-      operationId: 'hello_notification'
-      responses:
-        default:
-          description: Default error sample response
   /users:
     post:
       operationId: "signup"
@@ -247,7 +214,7 @@ paths:
     get:
       operationId: "get_recommendations"
       x-google-backend:
-        address: ${notification_service_url}
+        address: ${recommendation_service_url}
         path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
       - in: path
