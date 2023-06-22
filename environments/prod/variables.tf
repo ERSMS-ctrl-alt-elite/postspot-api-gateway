@@ -24,7 +24,7 @@ variable "post_service_url" {
   type = string
 }
 
-variable "notification_service_url" {
+variable "recommendation_service_url" {
   type = string
 }
 

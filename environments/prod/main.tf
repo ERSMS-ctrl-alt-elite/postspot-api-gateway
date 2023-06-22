@@ -6,7 +6,7 @@ module "postspot_api_gateway" {
   environment              = var.environment
   user_service_url         = var.user_service_url
   post_service_url         = var.post_service_url
-  notification_service_url = var.notification_service_url
+  recommendation_service_url = var.recommendation_service_url
   commit_sha               = var.commit_sha
 }
 
