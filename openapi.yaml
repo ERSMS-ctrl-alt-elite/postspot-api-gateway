@@ -54,39 +54,6 @@ x-google-management:
         values:
           STANDARD: 1
 paths:
-  /hello_user:
-    get:
-      x-google-backend:
-        address: ${user_service_url}
-        path_translation: APPEND_PATH_TO_ADDRESS
-      summary: Displays user service hello page
-      description: ''
-      operationId: 'hello_user'
-      responses:
-        default:
-          description: Default error sample response
-  /hello_post:
-    get:
-      x-google-backend:
-        address: ${post_service_url} 
-        path_translation: APPEND_PATH_TO_ADDRESS
-      summary: Displays post service hello page
-      description: ''
-      operationId: 'hello_post'
-      responses:
-        default:
-          description: Default error sample response
-  /hello_notification:
-    get:
-      x-google-backend:
-        address: ${notification_service_url} 
-        path_translation: APPEND_PATH_TO_ADDRESS
-      summary: Displays notification service hello page
-      description: ''
-      operationId: 'hello_notification'
-      responses:
-        default:
-          description: Default error sample response
   /users:
     post:
       operationId: "signup"
@@ -98,6 +65,21 @@ paths:
         '200':
           description: Successful response
       summary: Signup
+  /users/{google_id}:
+    get:
+      operationId: "get_user"
+      x-google-backend:
+        address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        type: string
+        name: google_id
+        required: true
+      responses:
+        '200':
+          description: Successful response
+      summary: GetUser
   /users/{followee_google_id}/followers:
     get:
       operationId: "get_followers"
@@ -131,6 +113,22 @@ paths:
         '404':
           description: Not found
       summary: Follow User
+    delete:
+      operationId: "delete_followees"
+      x-google-backend:
+        address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        name: followee_google_id
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+      summary: Delete Followee
   /users/{follower_google_id}/followees:
     get:
       operationId: "get_followees"
@@ -148,27 +146,6 @@ paths:
         '404':
           description: Not found
       summary: Get Followees
-  /users/{follower_google_id}/followees/{followee_google_id}:
-    delete:
-      operationId: "delete_followees"
-      x-google-backend:
-        address: ${user_service_url}
-        path_translation: APPEND_PATH_TO_ADDRESS
-      parameters:
-      - in: path
-        type: string
-        name: follower_google_id
-        required: true
-      - in: path
-        name: followee_google_id
-        type: string
-        required: true
-      responses:
-        '200':
-          description: Successful response
-        '404':
-          description: Not found
-      summary: Delete Followee
   /posts:
     post:
       operationId: "add_post"
@@ -180,6 +157,21 @@ paths:
         '200':
           description: Successful response
       summary: Add Post
+    get:
+      operationId: "get_post_by_author"
+      x-google-backend:
+        address: ${post_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: query
+        name: author_google_id
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Posts by distinguished author
+        '404':
+          description: Not found
   /posts/{post_id}:
     get:
       operationId: "get_post"
@@ -218,3 +210,20 @@ paths:
         '404':
           description: Not found
       summary: Get Posts Nearby
+  /recommendations/{user_google_id}:
+    get:
+      operationId: "get_recommendations"
+      x-google-backend:
+        address: ${recommendation_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        name: user_google_id
+        type: number
+        required: true
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+      summary: Get Recommendations

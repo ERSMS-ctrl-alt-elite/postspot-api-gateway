@@ -35,10 +35,10 @@ steps:
         >> /workspace/backends_urls.env
 
       gcloud run services describe \
-        notification-service-${_ENVIRONMENT} \
+        recommendation-service-${_ENVIRONMENT} \
         --region ${_LOCATION} \
         --project ${_PROJECT_ID} \
-        --format 'value(format("export TF_VAR_notification_service_url={0}", status.url))' \
+        --format 'value(format("export TF_VAR_recommendation_service_url={0}", status.url))' \
         >> /workspace/backends_urls.env
 
 - id: 'Prepare and apply Terraform migration'
