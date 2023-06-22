@@ -99,7 +99,7 @@ paths:
           description: Successful response
       summary: Signup
   /users/{google_id}:
-    post:
+    get:
       operationId: "get_user"
       x-google-backend:
         address: ${user_service_url}
