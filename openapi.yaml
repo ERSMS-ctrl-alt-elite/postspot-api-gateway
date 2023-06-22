@@ -243,3 +243,20 @@ paths:
         '404':
           description: Not found
       summary: Get Posts Nearby
+  /recommendations/{user_google_id}:
+    get:
+      operationId: "get_recommendations"
+      x-google-backend:
+        address: ${notification_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        name: user_google_id
+        type: number
+        required: true
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+      summary: Get Recommendations
