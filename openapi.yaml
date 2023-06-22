@@ -202,7 +202,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Posts by author
+          description: Posts by distinguished author
         '404':
           description: Not found
   /posts/{post_id}:
