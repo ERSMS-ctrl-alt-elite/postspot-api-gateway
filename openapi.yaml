@@ -98,6 +98,21 @@ paths:
         '200':
           description: Successful response
       summary: Signup
+  /users/{google_id}:
+    post:
+      operationId: "get_user"
+      x-google-backend:
+        address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        type: string
+        name: google_id
+        required: true
+      responses:
+        '200':
+          description: Successful response
+      summary: GetUser
   /users/{followee_google_id}/followers:
     get:
       operationId: "get_followers"
