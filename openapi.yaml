@@ -131,6 +131,22 @@ paths:
         '404':
           description: Not found
       summary: Follow User
+    delete:
+      operationId: "delete_followees"
+      x-google-backend:
+        address: ${user_service_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      parameters:
+      - in: path
+        name: followee_google_id
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Not found
+      summary: Delete Followee
   /users/{follower_google_id}/followees:
     get:
       operationId: "get_followees"
@@ -148,23 +164,6 @@ paths:
         '404':
           description: Not found
       summary: Get Followees
-  /users/{followee_google_id}/followers:
-    delete:
-      operationId: "delete_followees"
-      x-google-backend:
-        address: ${user_service_url}
-        path_translation: APPEND_PATH_TO_ADDRESS
-      parameters:
-      - in: path
-        name: followee_google_id
-        type: string
-        required: true
-      responses:
-        '200':
-          description: Successful response
-        '404':
-          description: Not found
-      summary: Delete Followee
   /posts:
     post:
       operationId: "add_post"
